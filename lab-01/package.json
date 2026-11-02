@@ -1,17 +1,25 @@
 {
-  "name": "lab-01",
+  "name": "bdf-lab-01",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Lab 1: Node.js and Express server - Backend Development Fundamentals",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "http": "node server-http.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "keywords": [
+    "node",
+    "express",
+    "backend",
+    "lab"
+  ],
+  "author": "P. Manish",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
-    "express": "^5.3.0"
+    "express": "^4.21.2"
   }
 }

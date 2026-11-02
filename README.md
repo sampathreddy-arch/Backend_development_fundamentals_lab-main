@@ -1,15 +1,20 @@
-# Node.js and Express - Course Lab Repository
+# Backend Development Fundamentals — Lab Reports
 
-This repository contains the lab work for **Backend Development Fundamentals**.
+**Maduru Sampath Kumar Reddy** · Registration number **252U1R7060** · Section **CSE FSD 2B 309**
 
-| Lab | Topic | Folder |
-| --- | --- | --- |
-| Lab 01 | Node.js and Express server | [`lab-01/`](lab-01/) |
-| Lab 02 | SQLite database and CRUD routes | [`lab-02/`](lab-02/) |
+Course: Backend Development Fundamentals — Year II Term II — Aurora
+Faculty: Joel Prashanth D
 
-## Lab 01
+This repository holds one folder per lab for the course. Each folder is a self-contained project with its own `README.md`, source code, and screenshots.
 
-The original Lab 1 files are preserved unchanged in [`lab-01/`](lab-01/).
+## Lab index
+
+| Lab | Title | Topics | Folder |
+|---|---|---|---|
+| Lab 01 | Node.js and Express server | Node.js `http` module, Express routing, status codes, 404 handling | [`lab-01/`](./lab-01) |
+| Lab 02 | SQLite database and CRUD routes | SQLite, `sqlite`/`sqlite3`, parameterised queries, REST CRUD, status codes | [`lab-02/`](./lab-02) |
+
+## Running any lab
 
 ```bash
 cd lab-01
@@ -17,27 +22,11 @@ npm install
 npm start
 ```
 
-The Lab 1 server runs at `http://localhost:3000`.
+Each lab's `README.md` documents its own endpoints, environment variables and screenshots.
 
-## Lab 02
+## Rules followed in every lab
 
-Lab 2 adds a SQLite database and a complete CRUD API for books.
-
-```bash
-cd lab-02
-npm install
-npm run dev
-```
-
-The Lab 2 server also runs at `http://localhost:3000`. Run only one lab at a time,
-or change the `PORT` environment variable for one of them.
-
-See [`lab-02/README.md`](lab-02/README.md) for the database schema, endpoint
-documentation, sample requests, test results, and viva answers.
-
-## Repository notes
-
-- `node_modules/` is not committed; run `npm install` inside the lab folder.
-- Do not commit `.env` files or secrets.
-- `lab-02/books.db` is committed intentionally so the lab submission includes
-  the database file required by the lab sheet.
+- `node_modules` is never committed; each folder has a `.gitignore`.
+- `.env` files are never committed and contain no real values in the repository.
+- Every route returns the correct HTTP status code.
+- Database queries use parameterised statements, never string concatenation with user input.

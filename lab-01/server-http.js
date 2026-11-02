@@ -1,10 +1,14 @@
+// Task 3: a plain Node.js web server using the built-in http module.
+// Run with: npm run http  (listens on port 3000)
 const http = require("http");
 
-const server = http.createServer((request, response) => {
-  response.writeHead(200, { "Content-Type": "text/plain" });
-  response.end("Hello");
+const PORT = process.env.PORT || 3000;
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
+  res.end("Hello");
 });
 
-server.listen(3000, () => {
-  console.log("HTTP server running at http://localhost:3000");
+server.listen(PORT, () => {
+  console.log(`http server running at http://localhost:${PORT}`);
 });

@@ -1,34 +1,40 @@
+// Task 4-7: the same server rewritten with Express.
+// Run with: npm start  (listens on port 3000, or on $PORT when deployed)
 const express = require("express");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-// GET /
-app.get("/", (request, response) => {
-  response.status(200).send("Welcome to my Lab 1 server!");
+// GET / -> plain welcome text
+app.get("/", (req, res) => {
+  res.status(200).send("Welcome to Lab 1: Node.js and Express server");
 });
 
-// GET /about
-app.get("/about", (request, response) => {
-  response.status(200).json({
-    name: "Siripuram Nivas",
-    section: "CSE(FSD)2B"
+// GET /about -> JSON with my name and section
+app.get("/about", (req, res) => {
+  res.status(200).json({
+    name: "P. Manish",
+    section: "CSE FSD 2B 309"
   });
 });
 
-// GET /time
-app.get("/time", (request, response) => {
-  response.status(200).json({
-    currentDateTime: new Date()
+// GET /time -> current date and time using new Date()
+app.get("/time", (req, res) => {
+  res.status(200).json({
+    currentTime: new Date()
   });
 });
 
-// Handle unknown routes
-app.use((request, response) => {
-  response.status(404).send("404 - Page Not Found");
+// Any other path -> 404
+app.use((req, res) => {
+  res.status(404).send("404 - Page not found");
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Express server running at http://localhost:${PORT}`);
-});
+// Listen only when this file is run directly (Vercel imports the app instead)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Express server running at http://localhost:${PORT}`);
+  });
+}
+
+module.exports = app;

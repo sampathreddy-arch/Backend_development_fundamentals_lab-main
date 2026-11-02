@@ -1,27 +1,21 @@
 # Dependencies
 node_modules/
+*/node_modules/
 
-# Environment files and secrets
+# Environment variables (never commit real values)
 .env
+*.env
 .env.*
-!.env.example
-
-# Editor / IDE folders
-.vscode/
-.idea/
-.qodo/
 
 # Logs
 *.log
 npm-debug.log*
 
-# Test output and temporary databases
-coverage/
-lab-02/tests/*.db
-lab-02/tests/*.db-journal
-lab-02/tests/*.db-wal
-lab-02/tests/*.db-shm
-
-# Operating system files
+# OS / editor files
 .DS_Store
 Thumbs.db
+.vscode/
+.idea/
+
+# Vercel
+.vercel/

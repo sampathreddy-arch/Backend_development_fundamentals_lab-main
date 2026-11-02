@@ -1,203 +1,134 @@
-# Lab 1: Node.js and Express Server
+# Lab 1: Node.js and Express server
 
-## Student Details
+**Maduru Sampath Kumar Reddy** · Registration number **252U1R7060** · Section **CSE FSD 2B 309**
 
-| Field               | Details                                              |
-| ------------------- | ---------------------------------------------------- |
-| **Name**            | Maduru Sampath Kumar Reddy                                      |
-| **Registration No** | 252U1R7060                                           |
-| **Section**         | CSE(FSD)2B                                           |
-| **Course**          | Backend Development Fundamentals                     |
-| **Lab Number**      | Lab 01                                               |
-| **Live Link**       | https://node-js-and-express-server-lab1.vercel.app/  |
 
----
+**Live link:** https://lab1bdf.vercel.app/
+
+
+Course: Backend Development Fundamentals — Year II Term II — Aurora
+Faculty: Joel Prashanth D
 
 ## Objective
 
-The objective of this lab is to:
+Set up a Node.js project and build a small web server twice: first with the built-in `http` module, then with Express. The Express version exposes three routes and returns a 404 message for any unknown path.
 
-- Initialize a Node.js project using `npm init -y`
-- Install and use the Express.js framework
-- Create a basic HTTP server using Node.js's built-in `http` module
-- Create an Express server with multiple routes
-- Return correct HTTP status codes for each route
-- Handle unknown routes with a 404 response
-- Document the project with a README, screenshots, and proper project structure
+## Technologies used
 
----
+- Node.js (v18 or later)
+- Express.js 4
+- JavaScript
+- npm
+- Visual Studio Code
 
-## Technologies Used
+## Project structure
 
-- **Node.js** - JavaScript runtime environment
-- **Express.js** - Minimal web framework for Node.js
-- **npm** - Node Package Manager for managing dependencies
+```text
+lab-01/
+├── api/
+│   └── index.js           # Vercel entry point (imports the Express app)
+├── screenshots/
+│   ├── home.png
+│   ├── about.png
+│   ├── time.png
+│   └── not-found.png
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── server-http.js         # Built-in http module server
+├── server.js              # Express server
+├── vercel.json            # Routes all requests to api/index.js
+└── README.md
+```
 
----
-
-## Project Structure
-
-`Node_js_and_Express_server lab1/
-|-- server-http.js       # Basic HTTP server using Node.js built-in http module
-|-- server.js            # Express server with all required routes
-|-- package.json         # Project metadata and dependencies
-|-- package-lock.json    # Exact dependency versions (auto-generated)
-|-- .gitignore           # Files to exclude from Git
-|-- README.md            # Project documentation (this file)
-+-- screenshots/
-    |-- home.png         # GET / response
-    |-- about.png        # GET /about response
-    |-- time.png         # GET /time response
-    +-- not-found.png    # 404 unknown route response`
-
----
-
-## Package.json Fields Explained
-
-| Field          | Description                                                          |
-| -------------- | -------------------------------------------------------------------- |
-| `name`         | The name of the project/package (`lab-01`)                           |
-| `version`      | The current version of the project (`1.0.0`)                         |
-| `description`  | A short description of what the project does                         |
-| `main`         | The entry point file for the project (e.g., `index.js`)              |
-| `scripts`      | Shortcut commands; `start` runs `node server.js`                     |
-| `keywords`     | Array of keywords for npm discovery                                  |
-| `author`       | Name of the author or developer                                      |
-| `license`      | The license type (ISC is a permissive open-source license)           |
-| `dependencies` | Packages required to run the app in production (e.g., express)       |
-| `type`         | Specifies module system; `commonjs` means require() / module.exports |
-
----
-
-## Installation and Setup
+## How to run
 
 ### Prerequisites
 
-- Node.js installed on your machine
-- npm (comes bundled with Node.js)
+- Node.js installed (`node --version`)
+- npm installed (`npm --version`)
 
-### Steps to Install
+### Install and start
 
-1. Clone or download the project to your local machine.
-2. Open a terminal in the project folder.
-3. Install dependencies:
+Open a terminal in this `lab-01` folder and install the dependencies:
 
-`npm install`
+```bash
+npm install
+```
 
----
+Start the Express server:
 
-## How to Run
+```bash
+npm start
+```
 
-### Run the Basic HTTP Server
+Then open `http://localhost:3000` in a browser.
 
-`node server-http.js`
+To run the plain `http` module version instead:
 
-Expected output in the terminal:
-`HTTP server running at http://localhost:3000`
+```bash
+npm run http
+```
 
-Open your browser and navigate to http://localhost:3000 - you should see:
-`Hello`
+Stop a running server with `Ctrl + C` before starting the other one, because both use the same port.
 
-> **Note:** Stop this server (Ctrl+C) before starting the Express server, since both use port 3000.
+### Environment variables
 
-### Run the Express Server
+| Variable | Required | Description |
+|---|---|---|
+| `PORT` | No | Port the server listens on. Falls back to `3000` when it is not set. |
 
-`node server.js`
-
-Expected output in the terminal:
-`Express server running at http://localhost:3000`
-
----
+No other environment variables or secrets are used in this lab, so there is no `.env` file to create. Nothing sensitive is committed to the repository.
 
 ## Endpoints
 
-| Method | Endpoint  | Description                              | Expected Status |
-| ------ | --------- | ---------------------------------------- | --------------- |
-| GET    | /         | Returns a welcome message                | 200 OK          |
-| GET    | /about    | Returns student name and section in JSON | 200 OK          |
-| GET    | /time     | Returns the current date and time        | 200 OK          |
-| GET    | /anything | Unknown route - example of 404           | 404 Not Found   |
+| Method | Path | Description | Status |
+|---|---|---|---|
+| GET | `/` | Returns the welcome text. | 200 OK |
+| GET | `/about` | Returns my name and section as JSON. | 200 OK |
+| GET | `/time` | Returns the current date and time as JSON, generated with `new Date()`. | 200 OK |
+| GET | `/anything-else` | Any unknown path returns `404 - Page not found`. | 404 Not Found |
 
-> **Note:** `/anything` is just one example. Any undefined route (e.g., `/hello`, `/xyz`, `/test`) will also return a `404 Not Found` response.
+The plain `http` server in `server-http.js` answers every request with `Hello` and status `200`.
 
-### Testing the Routes
+Status codes were checked for every route in the browser and from the terminal:
 
-After running `node server.js`, open your browser to test:
-
-| URL                                | Expected Response                              |
-| ---------------------------------- | ---------------------------------------------- |
-| http://localhost:3000/             | Welcome to my Lab 1 server!                    |
-| http://localhost:3000/about        | {"name":"Your Name","section":"Your Section"}  |
-| http://localhost:3000/time         | {"currentDateTime":"2026-10-17T03:15:45.116Z"} |
-| http://localhost:3000/unknownroute | 404 - Page Not Found (with HTTP status 404)    |
-
----
+```text
+GET /                     -> 200
+GET /about                -> 200
+GET /time                 -> 200
+GET /unknown-route        -> 404
+```
 
 ## Screenshots
 
-### GET / - Home Route (200 OK)
+### 1. Home route — `GET /`
 
-![Home route](screenshots/home.png)
+Returns the welcome message with status 200.
 
-### GET /about - About Route (200 OK)
+![Home route](./screenshots/home.png)
 
-![About route](screenshots/about.png)
+### 2. About route — `GET /about`
 
-### GET /time - Time Route (200 OK)
+Returns name and section as JSON with status 200.
 
-![Time route](screenshots/time.png)
+![About route](./screenshots/about.png)
 
-### Unknown Route - 404 Not Found
+### 3. Time route — `GET /time`
 
-![404 Not Found](screenshots/not-found.png)
+Returns the current date and time from `new Date()` with status 200.
 
----
+![Time route](./screenshots/time.png)
 
-## HTTP Status Codes
+### 4. Unknown route — 404
 
-| Status Code | Name      | Meaning                                                   |
-| ----------- | --------- | --------------------------------------------------------- |
-| 200         | OK        | The request was successful                                |
-| 404         | Not Found | The requested route/resource does not exist on the server |
+Any path that is not defined returns the 404 message.
 
----
+![Unknown route](./screenshots/not-found.png)
 
-## Viva Questions and Answers
+## Rules followed
 
-**Q1: What is the difference between package.json and node_modules?**
-
-`package.json` is a configuration file that lists the project's metadata and its dependencies (e.g., Express). It is small and committed to Git. `node_modules` is the folder where npm actually downloads and stores all the installed packages and their sub-packages. It can contain thousands of files and is very large, so it is never committed to Git - it is listed in `.gitignore`. Anyone who clones the project can regenerate `node_modules` by running `npm install`.
-
----
-
-**Q2: What does app.listen() do?**
-
-`app.listen(PORT, callback)` starts the Express web server and tells it to begin listening for incoming HTTP requests on the specified port number. The optional callback function runs once the server has successfully started. For example:
-
-`js
-app.listen(3000, () => {
-  console.log("Express server running at http://localhost:3000");
-});
-`
-
-After this line executes, the server stays running and is ready to handle requests.
-
----
-
-**Q3: What do request and response represent?**
-
-In each route handler, Express provides two objects:
-
-- **request (req)** - Represents the incoming HTTP request from the client. It contains information such as the URL path, HTTP method, query parameters, headers, and request body.
-- **response (res)** - Represents the HTTP response that the server sends back to the client. It provides methods like `response.status()`, `response.send()`, and `response.json()` to control what is returned.
-
----
-
-## Problems Faced and Solutions
-
-| Problem                                                                                                                              | Solution                                                             |
-| ------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
-| **Port conflict** - Running `server-http.js` and `server.js` at the same time caused an EADDRINUSE error because both use port 3000. | Stopped the first server with Ctrl+C before starting the second one. |
-
----
-
+- `node_modules` is not committed; it is excluded by `.gitignore`.
+- No `.env` file or secret values are committed.
+- Every route returns the correct status code (200 for successful routes, 404 for unknown paths).
+- The repository is public.
